@@ -3,6 +3,10 @@ import { check } from 'meteor/check';
 
 Meteor.startup(() => {
   // code to run on server at startup
+    // bootstrap the admin user if they exist -- You'll be replacing the id later
+    if (Meteor.users.findOne("j4PtziQqbbyaFeEuC")) {
+        Roles.addUsersToRoles("j4PtziQqbbyaFeEuC", ['admin']);
+    }
 });
 
 Meteor.methods({

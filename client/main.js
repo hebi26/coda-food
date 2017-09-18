@@ -147,12 +147,25 @@ Template.formpanier.events({
         nbitem = event.target.nbitem.value;
         Panier.update(this._id, {$set:{nbitem: nbitem}});
         Session.set('inupdate'+this._id, false);
-
     }
-
 })
 
+// ==============ADMIN VIEW=================================
 
+Template.admin.helpers({
+    // check if user is an admin
+    'isAdminUser': function() {
+        return Roles.userIsInRole(Meteor.user(), ['admin']);
+    }
+});
+
+// ==================/====HEADER=====================================
+
+Template.header.helpers({
+    'getroute':function() {
+        routeactuelle = Iron.controller();
+    }
+})
 
 
 
