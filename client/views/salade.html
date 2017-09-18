@@ -1,0 +1,28 @@
+<template name="salade">
+
+    {{> header}}
+
+    <div class="catbox">
+        <h3>Listes des salades</h3>
+        <a class="btn btn-success" href="{{pathFor route='categorie'}}">Retour</a>
+        <a href="{{pathFor route='panier'}}"><img class="panier" src="panier.png"></a>
+    <hr>
+    </div>
+
+    <ul class="tabitem">
+        {{#each listsalade}}
+            <li class="oneitem">
+                <div class="row">
+                    <div class="itemimg col-xs-12 col-md-3">
+                        <img class="img-fluid" src="{{image}}">
+                    </div>
+                    <div class="itemdescription col-xs-12 col-md-9">
+                        <h4>{{name}} {{price}}€</h4>
+                        <p class="itemdesc">{{description}}</p>
+                        {{> form}}
+                    </div>
+                </div>
+            </li><hr>
+        {{/each}}
+    </ul>
+</template>

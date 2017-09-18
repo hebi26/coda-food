@@ -1,0 +1,286 @@
+body, html{
+    width: 100%;
+    height: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+body {
+    background-image : url('boismarron.jpeg');
+}
+
+.navbar-brand{
+    padding : 5px !important;
+    width : 100px;
+}
+.bandeau{
+    width : 100%;
+    height : 20px;
+    margin-top : -20px;
+    background-image : url('boistop.jpg');
+}
+.boximgcat{
+    width : 60%;
+    margin : auto;
+}
+.imgcat{
+    width : 100%;
+}
+.liencat{
+    color : white;
+    font-weight : bold;
+    font-size : 20px;
+}
+.row{
+    padding: 0;
+    margin: 0;
+}
+.box{
+    padding: 5px 10px;
+}
+.catrow{
+    margin-top : 50px;
+}
+.catbox{
+    color: white;
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    margin-bottom : 50px;
+}
+.catbox h3{
+    font-size : 35px;
+    text-shadow: 10px 10px 10px black;
+    color : orange;
+    font-style : italic;
+}
+.boxmenu{
+    width: 100%;
+    height: 250px;
+    text-align: center;
+    padding : 20px 0px;
+    background-color : rgba(0, 0, 0, 0.5);
+    border-radius : 5px;
+}
+.boxmenu:hover{
+    border : 1px solid orange;
+}
+.tabitem{
+    width: 100%;
+    padding: 10px 10px;
+}
+.oneitem{
+    text-align: center;
+    margin-bottom: 10px;
+    padding: 10px 10px;
+}
+.itemdescription h4{
+    color : orange;
+    text-shadow : 5px 5px 5px black;
+}
+.itemdescription p{
+    color : white;
+    text-shadow : 5px 5px 5px black;
+}
+.img-fluid{
+    max-width: 200px;
+    height: auto;
+}
+.nbitem{
+    width: 50px;
+    margin-top: 4px;
+}
+
+#login-dropdown-list{
+    background-image : url('bois.png');
+    border : 1px inset white;
+    color: white;
+    position: absolute;
+    width: 250px;
+    left: -70px;
+}
+#login-dropdown-list label{
+    color : orange;
+}
+
+#login-email, #login-password{
+    color: black;
+}
+
+#login-sign-in-link{
+    width: 100px;
+    color: white;
+    font-weight: bold;
+    padding-left: 15px;
+    position: absolute;
+    top: 3px;
+    left: 15vw;
+}
+#login-sign-in-link:hover{
+    color :orange;
+    text-shadow :5px 5px 5px black;
+}
+#login-name-link{
+    position: absolute;
+    top: 36px;
+    left : -100px;
+    width: 200px;
+    color : orange;
+    text-shadow :5px 5px 5px black;
+}
+.itemdesc{
+    text-align: center;
+    width: 70%;
+    margin: auto;
+}
+#imgpizzaspec, #imgboissonspec {
+width: 70%;
+}
+
+
+@media screen and (max-width: 768px){
+    #login-name-link{
+        position: absolute;
+        top: 5px;
+        left: 20px;
+        color : orange;
+        font-size : 9px;
+        text-shadow : 5px 5px 5px black;
+    }
+    #imgpizzaspec, #imgboissonspec{
+        width: auto;
+        max-height: 150px;
+    }
+}
+.retour{
+    margin: 10px 10px;
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 10px;
+}
+.retour p{
+    margin-top: 7px;
+    padding: 0;
+}
+
+.retourconf h3{
+    color: white;
+    text-align: center;
+    font-weight: bold;
+}
+.panier{
+    width: 40px;
+    height: auto;
+    margin-left: 10px;
+}
+.panieritem{
+    color : lawngreen;
+    text-shadow : 5px 5px 5px black;
+}
+.panieritem strong{
+    color :orange;
+    text-shadow: 5px 5px 5px black;
+}
+
+.delete, .update{
+    width: 20px;
+    height: auto;
+}
+.added{
+    width: 30px;
+}
+.controlitem{
+    padding-top: 0px;
+
+}
+
+.itembox{
+    padding: 0;
+}
+
+li{
+    list-style: none;
+}
+.formadress{
+    width: 90%;
+    margin: auto;
+    color: white;
+}
+.codepost{
+    width: 30%;
+}
+.name{
+    width: 50%;
+}
+.displaynbitem{
+    padding: 0px 7px;
+    border : 2px solid orange;
+    text-align: center;
+    display: inline;
+    color : white;
+}
+.updatebtn{
+    padding: 4px 10px;
+}
+
+.controlbox{
+    padding-top: 8px;
+}
+
+.btn-primary{
+    background-color : orange;
+    border : none;
+    color : black;
+}
+.btn-primary:hover{
+    background-color: orange;
+    color : black;
+    box-shadow : 5px 5px 5px black;
+}
+.btn-primary:focus{
+    background-color : orange;
+    color : black;
+    box-shadow : 5px 5px 5px black;
+}
+hr{
+    border : 1px inset orange;
+    width : 80%;
+}
+.link a{
+    color : white !important;
+}
+.link a:hover{
+    color : orange !important;
+    text-shadow : 5px 5px 5px black;
+}
+.btn-success{
+    color : black;
+    background-color: orange;
+    border : none;
+}
+.btn-success:hover{
+    color : black;
+    background-color: orange;
+    box-shadow : 5px 5px 5px black;
+}
+.btn-success:focus{
+    color : black;
+    background-color: orange;
+    box-shadow : 5px 5px 5px black;
+}
+
+.validate label{
+    color : orange;
+    text-shadow : 5px 5px 5px black;
+}
+
+.validate .name, .validate .codepost, .validate .adress{
+    color : white !important;
+    background-color : #262626 !important;
+    border : 1px solid orange !important;
+}
+#login-buttons-open-change-password, #login-buttons-logout, #login-buttons-password{
+    background-color : orange !important;
+    color : black !important;
+    border : none !important;
+}
+

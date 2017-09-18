@@ -1,0 +1,53 @@
+<template name="panier">
+{{> header}}
+
+    <div class="catbox">
+        <h3>Panier</h3>
+        <a class="retourbtn btn btn-success" href="{{pathFor route='categorie'}}">Retour</a>
+    <hr>
+    </div>
+
+    {{#unless commande}}
+
+            {{#if validation}}
+                {{> formcommande}}
+            {{else}}
+                    <ul class="retour">
+                        {{#each listitem}}
+                            <li>
+                                <div class="row">
+                                <div class="itembox col-xs-6">
+                                    <p class="panieritem"><strong>{{nameitem}} :</strong> {{priceitem}} € </p>
+                                </div>
+                                <div class="controlitem col-xs-6">
+                                    {{#unless isinupdate}}
+                                        <div class="controlbox">
+                                            <div class="displaynbitem">{{nbitem}}</div>
+                                            <img class="update" src="update.png">
+                                            <img class="delete" src="delete.png">
+                                        </div>
+                                    {{/unless}}
+                                    {{#if isinupdate}}
+                                        {{> formpanier}}
+                                    {{/if}}
+                                </div>
+                                </div>
+                            </li>
+                        {{/each}}
+                    </ul>
+                    {{#unless paniervide}}
+                        <button class="btnpanier btn btn-success center-block">Valider le panier</button>
+                    {{/unless}}
+            {{/if}}
+    {{/unless}}
+
+    <div class="retourconf">
+    {{#if commande}}
+        <h3>Commande validée</h3>
+    {{/if}}
+        {{#if erreurcommande}}
+            <h3>Livraison impossible à cete adresse.</h3>
+        {{/if}}
+    </div>
+
+</template>

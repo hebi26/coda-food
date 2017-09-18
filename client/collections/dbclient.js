@@ -1,0 +1,1 @@
+Panier = new Mongo.Collection('panier', {connection: null});

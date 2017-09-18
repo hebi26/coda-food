@@ -1,0 +1,25 @@
+<template name="header">
+
+    <nav class="mainNav navbar navbar-inverse navbar-static-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{{pathFor route='categorie'}}"><img class="imglogo img-responsive" src="logo2.png"></a>{{>loginButtons}}
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="link"><a href="{{pathFor route='panier'}}">panier</a></li>
+                <li class="link"><a href="#">contact</a></li>
+            </ul>
+        </div>
+    </div>
+    </nav>
+    <div class="bandeau"></div>
+</template>
