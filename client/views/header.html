@@ -15,8 +15,13 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
+                {{#if isadmin}}
+                    <li class="link"><a href="/admin">Administration</a></li>
+                {{/if}}
+                {{#unless isadmin}}
                 <li class="link"><a href="/panier">panier</a></li>
                 <li class="link"><a href="#">contact</a></li>
+                {{/unless}}
             </ul>
         </div>
     </div>

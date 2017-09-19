@@ -4,13 +4,13 @@ import { check } from 'meteor/check';
 Meteor.startup(() => {
   // code to run on server at startup
     // bootstrap the admin user if they exist -- You'll be replacing the id later
-    if (Meteor.users.findOne("j4PtziQqbbyaFeEuC")) {
-        Roles.addUsersToRoles("j4PtziQqbbyaFeEuC", ['admin']);
+    if (Meteor.users.findOne("rtkgRZdRJWLyQyB2H")) {
+        Roles.addUsersToRoles("rtkgRZdRJWLyQyB2H", ['admin']);
     }
 });
 
 Meteor.methods({
-    'commander'(username, codepost, adress, cmd) {
+    'commander'(username, codepost, adress, cmd, total) {
             check(username, String);
             check(codepost, String);
             check(adress, String);
@@ -25,6 +25,7 @@ Meteor.methods({
             codepost: codepost,
             adress: adress,
             commande: cmd,
+            total: total,
             createdAt : new Date(),
         })
     }

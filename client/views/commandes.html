@@ -1,0 +1,15 @@
+<template name="commandes">
+            <li>
+                <p>{{username}}</p>
+                <p>{{codepost}}</p>
+                <p>{{adress}}</p><br>
+                <ul>
+                {{#each commande}}
+                    <li>{{nameitem}}</li>
+                {{/each}}
+                </ul>
+                <p>{{total}} €</p>
+                <p>{{createdAt}}</p>
+            </li>
+        <hr>
+</template>

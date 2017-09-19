@@ -1,9 +1,31 @@
 <template name="admin">
 
     {{#if isAdminUser}}
-
 {{> header}}
 
+       <div class="bandadmin">
+           <button class="btnadmin btn btn-primary" id="btncmd">Commandes</button>
+           <button class="btnadmin btn btn-primary" id="btnlog">Logs</button>
+           <button class="btnadmin btn btn-primary" id="btndata">Data</button>
+       </div>
+
+        <div class="displayadmin">
+            {{#if iscmdclicked}}
+                <ul>
+                {{#each listcommandes}}
+                    {{> commandes}}
+                {{/each}}
+                </ul>
+            {{/if}}
+
+            {{#if islogclicked}}
+
+            {{/if}}
+            {{#if isdataclicked}}
+
+            {{/if}}
+
+        </div>
 
 
 
