@@ -1,0 +1,15 @@
+<template name="data">
+    <li class="datadetails">
+        {{#unless btnchangedataclicked}}
+        <p><strong class="datap">Nom : </strong>{{name}}</p>
+        <p><strong class="datap">Chemin de l'image : </strong>{{image}}</p>
+        <p><strong class="datap">Description : </strong>{{description}}</p>
+        <p><strong class="datap">Prix : </strong>{{price}} €</p>
+        <p><strong class="datap">Categorie : </strong>{{categorie}} <img class="btndeletedata" src="/delete.png"><img class="btnchangedata" src="/update.png"></p>
+        {{/unless}}
+        {{#if btnchangedataclicked}}
+            {{> formdata}}
+        {{/if}}
+    </li>
+    <hr>
+</template>

@@ -1,0 +1,46 @@
+<template name="formdata">
+
+    <form class="changedata">
+        <div class="row">
+            <div class="colformdata col-xs-12 col-md-3">
+                <div class="formdata form-group">
+                    <label for="nameitem">Nom :</label>
+                    <input type="text" class="data form-control" name="nameitem" required="required" value="{{name}}">
+                </div>
+            </div>
+
+            <div class="colformdata col-xs-12 col-md-5">
+                <div class="formdata form-group">
+                    <label for="imgitem">Chemin de l'image :</label>
+                    <input type="text" class="data form-control" name="imgitem" required="required" value="{{image}}">
+                </div>
+            </div>
+
+            <div class="colformdata col-xs-4 col-md-1">
+                <div class="formdata form-group">
+                    <label for="priceitem">Prix :</label>
+                    <input type="text" class="data form-control" name="priceitem" value="{{price}}">
+                </div>
+            </div>
+
+            <div class="colformdata col-xs-8 col-md-3">
+                <div class="formdata form-group">
+                    <label for="catitem">Categorie :</label>
+                    <input type="text" class="data form-control" name="catitem" required="required" value="{{categorie}}">
+                </div>
+            </div>
+
+            <div class="colformdata col-xs-12">
+                <div class="formdata form-group">
+                    <label for="describeitem">Description :</label>
+                    <input type="text" class="data form-control" name="describeitem" required="required" value="{{description}}">
+                </div>
+            </div>
+        </div>
+
+        <div class="formbtn form-group">
+            <button type="submit" class="btn btn-success">Enregistrer</button>
+        </div>
+    </form>
+
+</template>

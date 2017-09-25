@@ -8,9 +8,15 @@
     </div>
 
     {{#unless commande}}
-
+        {{#if paniervide}}
+            <h3 class="panierempty">Aucun article dans le panier</h3>
+        {{/if}}
             {{#if validation}}
+                {{#if isconnected}}
                 {{> formcommande}}
+                    {{else}}
+                    <h3 class="panierempty">Veuillez vous connecter pour poursuivre la commande</h3>
+                    {{/if}}
             {{else}}
                     <ul class="retour">
                         {{#each listitem}}
@@ -23,8 +29,8 @@
                                     {{#unless isinupdate}}
                                         <div class="controlbox">
                                             <div class="displaynbitem">{{nbitem}}</div>
-                                            <img class="update" src="update.png">
-                                            <img class="delete" src="delete.png">
+                                            <img class="update" src="/update.png">
+                                            <img class="delete" src="/delete.png">
                                         </div>
                                     {{/unless}}
                                     {{#if isinupdate}}
@@ -40,6 +46,7 @@
                         <h3 class="total">TOTAL : {{total}} €</h3>
                         <button class="btnpanier btn btn-success center-block">Valider le panier</button>
                     {{/unless}}
+
             {{/if}}
     {{/unless}}
 

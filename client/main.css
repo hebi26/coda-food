@@ -6,7 +6,7 @@ body, html{
 }
 
 body {
-    background-image : url('boismarron.jpeg');
+    background-image : url('/boismarron.jpeg');
 }
 
 .navbar-brand{
@@ -17,7 +17,7 @@ body {
     width : 100%;
     height : 20px;
     margin-top : -20px;
-    background-image : url('boistop.jpg');
+    background-image : url('/boistop.jpg');
 }
 .boximgcat{
     width : 60%;
@@ -40,6 +40,7 @@ body {
 }
 .catrow{
     margin-top : 50px;
+    /*margin-left: 15%;*/
 }
 .catbox{
     color: white;
@@ -92,7 +93,7 @@ body {
 }
 
 #login-dropdown-list{
-    background-image : url('bois.png');
+    background-image : url('/bois.png');
     border : 1px inset white;
     color: white;
     position: absolute;
@@ -103,7 +104,7 @@ body {
     color : orange;
 }
 
-#login-email, #login-password{
+#login-username, #login-password, #login-password-again{
     color: black;
 }
 
@@ -123,7 +124,7 @@ body {
 #login-name-link{
     position: absolute;
     top: 36px;
-    left : -100px;
+    left : -80px;
     width: 200px;
     color : orange;
     text-shadow :5px 5px 5px black;
@@ -136,15 +137,20 @@ body {
 #imgpizzaspec, #imgboissonspec {
 width: 70%;
 }
-
+/*@media screen and (max-width: 990px){*/
+    /*.catrow{*/
+        /*margin-top : 50px;*/
+        /*margin-left: inherit;*/
+    /*}*/
+/*}*/
 
 @media screen and (max-width: 768px){
     #login-name-link{
         position: absolute;
-        top: 5px;
-        left: 20px;
+        left: 40px;
+        top : 0px;
         color : orange;
-        font-size : 9px;
+        font-size : 18px;
         text-shadow : 5px 5px 5px black;
     }
     #imgpizzaspec, #imgboissonspec{
@@ -232,12 +238,12 @@ li{
     color : black;
 }
 .btn-primary:hover{
-    background-color: orange;
+    background-color: darkorange;
     color : black;
     box-shadow : 5px 5px 5px black;
 }
 .btn-primary:focus{
-    background-color : orange;
+    background-color : darkorange;
     color : black;
     box-shadow : 5px 5px 5px black;
 }
@@ -259,12 +265,12 @@ hr{
 }
 .btn-success:hover{
     color : black;
-    background-color: orange;
+    background-color: darkorange;
     box-shadow : 5px 5px 5px black;
 }
 .btn-success:focus{
     color : black;
-    background-color: orange;
+    background-color: darkorange;
     box-shadow : 5px 5px 5px black;
 }
 
@@ -293,7 +299,133 @@ hr{
 .bandadmin{
     margin-top: 20px;
     text-align : center;
+
 }
+
+.displayadmin{
+    margin : 20px 10px;
+    border-radius : 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    text-align : center;
+}
+
 .displayadmin p, .displayadmin li{
     color: white;
+}
+.displaycommande, .displaycommandedetail{
+    margin: 0;
+    padding: 0;
+}
+
+.commandedetail, .commandetotal{
+    color : orange !important;
+    text-shadow : 5px 5px 5px black !important;
+}
+.displayinfos{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: white;
+    color : black;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin-top: 5px;
+}
+.infoscommandes{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 90%;
+    margin : auto;
+    color : orange;
+    text-shadow: 5px 5px 5px black;
+}
+.strongtotal{
+    color: green;
+}
+.panierempty{
+    text-align: center;
+    width : 80%;
+    margin : auto;
+    color : orange;
+    text-shadow : 5px 5px 5px black;
+}
+.datadetails{
+    width: 80%;
+    margin: auto;
+    text-align: left;
+}
+.datadetails p{
+    text-shadow : 5px 5px 5px black;
+}
+.datap{
+    color : orange;
+}
+.btnchangedata, .btndeletedata{
+    float: right;
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+
+.colformdata{
+    padding: 0;
+}
+.colformdata label{
+    color : orange;
+}
+.data{
+    color : white;
+    background-color: #262626;
+    border : 1px solid orange;
+    border-radius : 5px;
+}
+.formdata{
+    padding: 0px 10px;
+}
+.formbtn{
+    text-align: center;
+}
+
+.boxcat{
+    padding: 0px;
+}
+
+.btnadd{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    right: 10%;
+    left: auto;
+    top : 190px;
+}
+.addData{
+    background-image: url('bois.png');
+    padding-top: 10px;
+    padding-bottom: 5px;
+    margin-bottom: 30px;
+    border: 1px solid orange;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+.optiondisplay{
+    display: inline;
+    padding: 5px 20px 5px 20px;
+}
+.optiondisplay:hover{
+    color: orange;
+    border: 1px solid orange;
+    border-radius: 5px;
+}
+
+.bandeaudata{
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
+.btn-danger{
+    padding: 5px 10px !important;
+    margin-right: 5px;
+}
+.btn-danger:hover{
+    box-shadow: 5px 5px 5px black;
 }

@@ -1,62 +1,23 @@
-<template name="categorie">
+<template name="cat">
 {{> header}}
 
+
     <div class="catrow row">
-        <div class="col-xs-12 col-md-1">
-        </div>
-        <div class="box col-xs-12 col-md-2">
-            <a href="/pizzas">
-            <div class="boxmenu box1">
-                <p class="liencat">Pizzas</p>
-                <div class="boximgcat">
-                <img class="imgcat img-fluid" id="imgpizzaspec" src="pizzaProvencale.png"><br>
-                </div>
-            </div>
-            </a>
-        </div>
-
-        <div class="box col-xs-12 col-md-2">
-            <a href="/burgers">
-            <div class="boxmenu box2">
-                <p class="liencat">Burgers</p>
-                <div class="boximgcat">
-                <img class="imgcat img-fluid" src="classicBurger.png"><br>
-                </div>
-            </div>
-            </a>
-        </div>
-        <div class="box col-xs-12 col-md-2">
-            <a href="/salades">
-            <div class="boxmenu box3">
-                <p class="liencat">Salades</p>
-                <div class="boximgcat">
-                <img class="imgcat img-fluid" src="sa1.png"><br>
-                </div>
-            </div>
-            </a>
-        </div>
-        <div class="box col-xs-12 col-md-2">
-            <a href="/boissons">
-            <div class="boxmenu box4">
-                <p class="liencat">Boissons</p>
-                <div class="boximgcat">
-                <img class="imgcat img-fluid" id="imgboissonspec" src="cocacola.png"><br>
-                </div>
-            </div>
-            </a>
-        </div>
-        <div class="box col-xs-12 col-md-2">
-            <a href="/desserts">
-                <div class="boxmenu">
-                    <p class="liencat">Desserts</p>
-                    <div class="boximgcat">
-                        <img class="imgcat img-fluid" src="milkshake.png"><br>
+        <ul class="boxcat">
+         {{#each listcat}}
+         <li>
+            <div class="box col-xs-12 col-md-2">
+                <a href="/products/{{name}}">
+                    <div class="boxmenu">
+                        <p class="liencat">{{name}}</p>
+                        <div class="boximgcat">
+                        <img class="imgcat img-fluid" id="imgpizzaspec" src="/{{image}}"><br>
+                        </div>
                     </div>
-                 </div>
-            </a>
-        </div>
-
-        <div class="box col-xs-12 col-md-1">
-        </div>
+                </a>
+            </div>
+         </li>
+         {{/each}}
+        </ul>
     </div>
 </template>

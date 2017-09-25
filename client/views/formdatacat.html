@@ -1,0 +1,25 @@
+<template name="formdatacat">
+
+    <form class="changedatacat">
+        <div class="row">
+            <div class="colformdata col-xs-12 col-md-6">
+                <div class="formdata form-group">
+                    <label for="nameitem">Nom :</label>
+                    <input type="text" class="data form-control" name="nameitem" required="required" value="{{name}}">
+                </div>
+            </div>
+
+            <div class="colformdata col-xs-12 col-md-6">
+                <div class="formdata form-group">
+                    <label for="imgitem">Chemin de l'image :</label>
+                    <input type="text" class="data form-control" name="imgitem" required="required" value="{{image}}">
+                </div>
+            </div>
+        </div>
+
+    <div class="formbtn form-group">
+    <button type="submit" class="btn btn-success">Enregistrer</button>
+    </div>
+    </form>
+
+</template>

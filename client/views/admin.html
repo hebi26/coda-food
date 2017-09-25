@@ -11,18 +11,51 @@
 
         <div class="displayadmin">
             {{#if iscmdclicked}}
-                <ul>
+                <h4 class="displayinfos">Commandes en cours</h4>
+                <ul class="displaycommande">
                 {{#each listcommandes}}
                     {{> commandes}}
                 {{/each}}
+
                 </ul>
+                {{#if cmdisempty}}
+                    <h4 class="infoscommandes">Aucune commandes en cours</h4>
+                {{/if}}
             {{/if}}
 
             {{#if islogclicked}}
-
+                <h4 class="displayinfos">Recettes totales : <strong class="strongtotal">{{totalrecettes}} €</strong></h4>
+            <ul class="displaycommande">
+                {{#each isdelivered}}
+                    {{> logs}}
+                {{/each}}
+            </ul>
             {{/if}}
-            {{#if isdataclicked}}
 
+            {{#if isdataclicked}}
+                <div class="bandeaudata">
+                    <p class="optiondisplay option1">Produits</p><p class="optiondisplay option2">Catégories</p>
+                </div>
+            {{#if option1clicked}}
+                {{#if addisclicked}}
+                    {{> addformdata}}
+                    {{else}}
+                    <h4 class="displayinfos">Liste des produits<img class="btnadd" src="/plus.png"></h4>
+                {{/if}}
+            <ul class="displaycommande">
+                {{#each listdata}}
+                    {{> data}}
+                {{/each}}
+            </ul>
+                {{/if}}
+            {{/if}}
+            {{#if option2clicked}}
+                <h4 class="displayinfos">Liste des Catégories<img class="btnadd" src="/plus.png"></h4>
+                <ul class="displaycommande">
+                {{#each listcat}}
+                    {{> datacat}}
+                {{/each}}
+                </ul>
             {{/if}}
 
         </div>

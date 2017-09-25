@@ -2,73 +2,20 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
-// ====================PIZZA==================
-// ------------SUSCRIBE-----------------------
-Template.pizza.onCreated(function() {
-    Meteor.subscribe('pizzas');
-})
-// -----------------HELPERS----------------
-Template.pizza.helpers({
-    'listpizza':function(){
-        return Pizzas.find();
-    }
-})// --------delete-----------------------
 
-// ===================BURGER========================
-// --------------SUSCRIBE----------------
-Template.burger.onCreated(function() {
-    Meteor.subscribe('burgers');
-})
-// -----------------------HELPERS---------
-Template.burger.helpers({
-    'listburger':function(){
-        return Burgers.find();
-    }
-})
-// ===================SALADE===============================
-// -------------SUSCRIBE---------------------
-Template.salade.onCreated(function() {
-    Meteor.subscribe('salades');
-})
-// --------------HELPERS-------------------------------
-Template.salade.helpers({
-    'listsalade':function(){
-        return Salades.find();
-    }
-})
-// ====================BOISSON=============================
-// ---------------------SUSCRIBE-----------------------------
-Template.boisson.onCreated(function() {
-    Meteor.subscribe('boissons');
-})
-// ---------------------HELPERS-----------------------
-Template.boisson.helpers({
-    'listboisson':function(){
-        return Boissons.find();
-    }
-})
-// =======================DESSERT===========================
-// -----------------------SUSCRIBE--------------------------
-Template.dessert.onCreated(function() {
-    Meteor.subscribe('desserts');
-})
-// -----------------------HELPERS-----------------------------
-Template.dessert.helpers({
-    'listdessert':function(){
-        return Desserts.find();
-    }
-})
+// ====================DISPLAY=============================
 // =========================FORM=========================
 // ==========EVENT=======================
 Template.form.events({
     'submit .additem'(event) {
         event.preventDefault();
 
-            nameitem = this.name;
-            priceitem = this.price;
-            nbitem = parseInt(event.target.nbitem.value);
+        nameitem = this.name;
+        priceitem = this.price;
+        nbitem = parseInt(event.target.nbitem.value);
 
-            // INSERTION DANS LA COLLECTION LOCALE PANIER
+        // INSERTION DANS LA COLLECTION LOCALE PANIER
+        if (nbitem > 0) {
             Panier.insert({
                 nameitem: nameitem,
                 priceitem: priceitem,
@@ -77,7 +24,10 @@ Template.form.events({
                 createdAt: new Date(),
             });
         }
+    }
+
 })
+
 // ======================PANNIER==============================
 // -----------------------SUSCRIBE-------------------------
 Template.panier.onCreated(function() {
@@ -107,10 +57,11 @@ Template.panier.events({
             adress= event.target.adress.value;
             cmd = Panier.find({}).fetch();
             total = Panier.find().sum('totalprice');
+            status = "en cours";
 
         // VERIF CODEPOST
             if(tabcodepost.includes(codepost)) {
-                Meteor.call('commander', username, codepost, adress, cmd, total);
+                Meteor.call('commander', username, codepost, adress, cmd, total, status);
                 Panier.remove({});
                 Session.set('comand', true);
                 Session.set('errorcmd', false);
@@ -167,6 +118,11 @@ Template.panier.helpers({
     },
     'erreurcommande': function () {
         return Session.get('errorcmd');
+    },
+    'isconnected':function(){
+        if (Meteor.userId()){
+            return true;
+        }
     }
 });
 
@@ -186,6 +142,8 @@ Template.formpanier.events({  //ON UPDATE LE PANIER
 // -----------------SUSCRIBE---------------------------
 Template.admin.onCreated(function() {
     Meteor.subscribe('commandes');
+    Meteor.subscribe('products');
+    Meteor.subscribe('categories');
 });
 // -------------------EVENTS----------------------------
 Template.admin.events({
@@ -204,6 +162,35 @@ Template.admin.events({
         Session.set('btncmd', false);
         Session.set('btnlog', false);
         Session.set('btndata', true);
+    },
+    'click .btnadd':function(){
+        Session.set('addform', true);
+    },
+    'submit .addData'(event){
+        event.preventDefault();
+        name=event.target.nameitem.value;
+        image=event.target.imgitem.value;
+        price=event.target.priceitem.value;
+        categorie=event.target.catitem.value;
+        description=event.target.describeitem.value;
+        Meteor.call('addproducts', image, name, description, price, categorie);
+        catexists = Categories.find({name: categorie}, {limit: 1}).count() > 0;
+        if(!catexists){
+            Meteor.call('addcategories', categorie, image);
+        }
+        Session.set('addform', false);
+    },
+    'click .option1':function(){
+        Session.set('option1', true);
+        Session.set('option2', false);
+    },
+    'click .option2':function(){
+        Session.set('option2', true);
+        Session.set('option1', false);
+    },
+
+    'click .addreturn':function(){
+        Session.set('addform', false);
     }
 });
 // ----------------------HELPERS----------------------
@@ -215,15 +202,43 @@ Template.admin.helpers({
     'iscmdclicked':function(){
         return Session.get('btncmd');
     },
+    'listcommandes':function(){
+        return Commandes.find({status : "en cours"});
+    },
+    'cmdisempty': function(){
+        if(Commandes.find({status : "en cours"}).count() ===0){
+            return true;
+        }
+    },
     'islogclicked':function(){
         return Session.get('btnlog');
+    },
+    'isdelivered':function(){
+        return Commandes.find({status: "livraison effectué"});
+    },
+    'totalrecettes':function(){
+        totalrecettes = Commandes.find({status : "livraison effectué"}).sum('total');
+        return totalrecettes;
     },
     'isdataclicked':function(){
         return Session.get('btndata');
     },
-    'listcommandes':function(){
-        return Commandes.find({});
+    'listdata':function(){
+        return Products.find();
+    },
+    'addisclicked':function(){
+        return Session.get('addform');
+    },
+    'option1clicked':function(){
+        return Session.get('option1');
+    },
+    'option2clicked':function(){
+        return Session.get('option2');
+    },
+    'listcat':function(){
+        return Categories.find();
     }
+
 });
 
 // ======================HEADER=====================================
@@ -242,12 +257,80 @@ Template.header.helpers({
     }
 })
 // =================COMMANDES================================
-// --------------------HELPERS--------------------
-Template.commandes.helpers({
-    'commande':function() {                 // ON VEUT RECUPERER LES OBJETS DE LA TABLE COMMANDE DU FIELD commande, ex: commande[{nameitem}]
-        return Commandes.find({}, 'commande'.nameitem);
+// --------------EVENTS-------------------
 
+Template.commandes.events({
+    'click .btnarchive':function(){
+        Meteor.call('archiver', this._id );
+        Session.set('archived'+this._id, true);
     }
 })
+// ===================DATA===========================
+
+Template.data.events({
+    'click .btnchangedata':function(){
+        Session.set('datachange'+this._id, true);
+    },
+    'submit .changedata'(event){
+        event.preventDefault();
+        name=event.target.nameitem.value;
+        image=event.target.imgitem.value;
+        price=event.target.priceitem.value;
+        categorie=event.target.catitem.value;
+        description=event.target.describeitem.value;
+
+        Meteor.call('updateproducts', this._id, name, image, price, categorie, description);
+
+        catexists = Categories.find({name: categorie}, {limit: 1}).count() > 0;
+
+        if(!catexists){
+            Meteor.call('addcategories', categorie, image);
+        }
+        Session.set('datachange'+this._id, false);
+    },
+
+    'click .btndeletedata':function(){
+        Meteor.call('deleteproducts', this._id);
+    }
+});
+Template.data.helpers({
+    'btnchangedataclicked':function(){
+        return Session.get('datachange'+this._id);
+    }
+});
+// ==========================CATEGORIE=================================
+Template.cat.helpers({
+    'listcat':function(){
+        return Categories.find();
+    }
+});
+// ========================DATACAT==================================
+    // --------------------EVENTS-------------------------
+    Template.datacat.events({
+        'click .btnchangedata': function () {
+            Session.set('datachange' + this._id, true);
+        },
+        'submit .changedatacat'(event){
+            event.preventDefault();
+            currentcat = Categories.findOne(this._id, {fields:{name: 1}});
+            currentcat = currentcat.name;
+            namecat=event.target.nameitem.value;
+
+            Meteor.call('updatecatforproducts', currentcat, namecat);
+
+            Session.set('datachange' + this._id, false);
+        },
+
+        'click .btndeletedata':function(){
+            Meteor.call('deletecategories');
+        }
 
 
+    });
+
+    // -----------------------HELPERS--------------------------
+Template.datacat.helpers({
+    'btnchangedataclicked':function(){
+        return Session.get('datachange'+this._id);
+    }
+})

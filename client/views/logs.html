@@ -1,0 +1,16 @@
+<template name="logs">
+    <li>
+        <h4 class="usercommande">{{username}}</h4>
+        <span><p>{{adress}} - {{codepost}}</p></span>
+        <ul class="displaycommandedetail">
+            {{#each commande}}
+                <li class="commandedetail">{{nameitem}} X{{nbitem}}</li>
+            {{/each}}
+            <p class="commandetotal"><strong>TOTAL : {{total}} €</strong></p>
+        </ul>
+        <p><em>{{createdAt}}</em></p>
+        <p class="commandedetail">{{status}}</p>
+    </li>
+    <hr>
+
+</template>

@@ -1,15 +1,17 @@
 <template name="commandes">
             <li>
-                <p>{{username}}</p>
-                <p>{{codepost}}</p>
-                <p>{{adress}}</p><br>
-                <ul>
-                {{#each commande}}
-                    <li>{{nameitem}}</li>
-                {{/each}}
+                <h4 class="usercommande">{{username}}</h4>
+                <span><p>{{adress}} - {{codepost}}</p></span>
+                <ul class="displaycommandedetail">
+                    {{#each commande}}
+                        <li class="commandedetail">{{nameitem}} X{{nbitem}}</li>
+                    {{/each}}
+                    <p class="commandetotal"><strong>TOTAL : {{total}} €</strong></p>
                 </ul>
-                <p>{{total}} €</p>
-                <p>{{createdAt}}</p>
+                <p><em>{{createdAt}}</em></p>
+                <p class="commandedetail">{{status}}</p>
+                    <button class="btnarchive btn btn-primary">Archiver</button>
             </li>
-        <hr>
+    <hr>
+
 </template>
