@@ -3,7 +3,7 @@
     {{> header}}
 
     <div class="catbox">
-        <h3>Listes des produits</h3>
+        <h3>Liste des produits</h3>
         <a class="btn btn-success" href="/">Retour</a>
         <a href="/panier"><img class="panier" src="/panier.png"></a>
         <hr>
@@ -18,13 +18,19 @@
                         <img class="img-fluid" src="/{{image}}">
                     </div>
                     <div class="itemdescription col-xs-12 col-md-9">
-                        <h4>{{name}} {{price}}€</h4>
+                        <h3>{{name}}</h3>
+
+                        <div class="roundprice"><p>{{price}}€</p></div>
                         <p class="itemdesc">{{description}}</p>
                         {{> form}}
+                        {{#if addtopanier}}
+                            <img class="imgaddtopanier" src="/valid.png"><h4 class="addtopanier">Article dans le panier</h4>
+                        {{/if}}
                     </div>
                 </div>
             </li>
             <hr>
         {{/each}}
     </ul>
+
 </template>

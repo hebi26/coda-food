@@ -10,6 +10,7 @@ Meteor.startup(() => {
 });
 
 Meteor.methods({
+
     'commander'(username, codepost, adress, cmd, total, status) {
             check(username, String);
             check(codepost, String);
@@ -72,11 +73,28 @@ Meteor.methods({
     },
 
     'updatecatforproducts'(currentcat, namecat) {
-        Products.findAndModify({
-            query: {categorie: currentcat},
-            sort: {categorie: 1},
-            update: {$set: {categorie: namecat}}
-        })
+        check(namecat, String);
+
+
+        Products.find({}).forEach(function (currentcat) {
+            Products.update({_id: currentcat._id}, {$set: {'categorie': namecat}});
+        });
+    },
+    'updatecat'(_id, namecat, imagecat){
+        check(namecat, String);
+        check(imagecat, String);
+
+        Categories.update(_id, {$set: {'name':namecat, 'image':imagecat}});
+    },
+
+    'deleteproductsforcat'(currentcat){
+        Products.find({}).forEach(function () {
+            Products.remove({'categorie': currentcat});
+        });
+    },
+
+    'deletecat'(_id){
+        Categories.remove(_id);
     }
 });
 

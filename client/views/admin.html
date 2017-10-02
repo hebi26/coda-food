@@ -1,7 +1,7 @@
 <template name="admin">
 
-    {{#if isAdminUser}}
-{{> header}}
+        {{#if isAdminUser}}
+            {{> header}}
 
        <div class="bandadmin">
            <button class="btnadmin btn btn-primary" id="btncmd">Commandes</button>
@@ -25,44 +25,43 @@
 
             {{#if islogclicked}}
                 <h4 class="displayinfos">Recettes totales : <strong class="strongtotal">{{totalrecettes}} €</strong></h4>
-            <ul class="displaycommande">
-                {{#each isdelivered}}
-                    {{> logs}}
-                {{/each}}
-            </ul>
+                <ul class="displaycommande">
+                    {{#each isdelivered}}
+                        {{> logs}}
+                    {{/each}}
+                </ul>
             {{/if}}
 
             {{#if isdataclicked}}
                 <div class="bandeaudata">
                     <p class="optiondisplay option1">Produits</p><p class="optiondisplay option2">Catégories</p>
                 </div>
-            {{#if option1clicked}}
-                {{#if addisclicked}}
-                    {{> addformdata}}
+                {{#if option1clicked}}
+                    {{#if addisclicked}}
+                        {{> addformdata}}
                     {{else}}
-                    <h4 class="displayinfos">Liste des produits<img class="btnadd" src="/plus.png"></h4>
+                        <h4 class="displayinfos">Liste des produits<img class="btnadd" src="/plus.png"></h4>
+                    {{/if}}
+                    <ul class="displaycommande">
+                        {{#each listdata}}
+                            {{> data}}
+                        {{/each}}
+                    </ul>
                 {{/if}}
-            <ul class="displaycommande">
-                {{#each listdata}}
-                    {{> data}}
-                {{/each}}
-            </ul>
-                {{/if}}
-            {{/if}}
-            {{#if option2clicked}}
-                <h4 class="displayinfos">Liste des Catégories<img class="btnadd" src="/plus.png"></h4>
+                {{#if option2clicked}}
+                    {{#if add2isclicked}}
+                        {{> formdatacatadd}}
+                    {{else}}
+                <h4 class="displayinfos">Liste des Catégories<img class="btnadd2" src="/plus.png"></h4>
+                    {{/if}}
                 <ul class="displaycommande">
-                {{#each listcat}}
-                    {{> datacat}}
-                {{/each}}
+                    {{#each listcat}}
+                        {{> datacat}}
+                    {{/each}}
                 </ul>
+                {{/if}}
             {{/if}}
-
         </div>
-
-
-
-
     {{/if}}
 
 </template>

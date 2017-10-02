@@ -2,21 +2,21 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
-
-// ====================DISPLAY=============================
 // =========================FORM=========================
 // ==========EVENT=======================
 Template.form.events({
     'submit .additem'(event) {
         event.preventDefault();
-
         nameitem = this.name;
         priceitem = this.price;
         nbitem = parseInt(event.target.nbitem.value);
 
         // INSERTION DANS LA COLLECTION LOCALE PANIER
         if (nbitem > 0) {
+
+            Session.set('inpanier'+this._id, true);
             Panier.insert({
+                idproduct: this._id,
                 nameitem: nameitem,
                 priceitem: priceitem,
                 nbitem: nbitem,
@@ -25,9 +25,13 @@ Template.form.events({
             });
         }
     }
+});
 
+Template.display.helpers({
+    'addtopanier':function(){
+        return Session.get('inpanier'+this._id);
+    }
 })
-
 // ======================PANNIER==============================
 // -----------------------SUSCRIBE-------------------------
 Template.panier.onCreated(function() {
@@ -50,7 +54,6 @@ Template.panier.events({
         event.preventDefault();
         Session.set('valid', false);
 
-
             tabcodepost =["30480", "30 480", "30520", "30 520", "30140", "30 140", "30340", "30 340", "30380", "30 380", "30110", "30 110", "30560", "30 560", "30360", "30 360", "30100", "30 100"];
             username= event.target.username.value;
             codepost= event.target.codepost.value;
@@ -63,8 +66,15 @@ Template.panier.events({
             if(tabcodepost.includes(codepost)) {
                 Meteor.call('commander', username, codepost, adress, cmd, total, status);
                 Panier.remove({});
+                Session.keys = {}
                 Session.set('comand', true);
                 Session.set('errorcmd', false);
+
+
+                // Panier.find({}).forEach(function (current) {
+                //     Session.set('inpanier'+current.idproduct, false);
+                // });
+
             }
             else{
                 Session.set('errorcmd', true);
@@ -81,6 +91,8 @@ Template.panier.events({
 
     // --------delete-----------------------
     'click .delete':function(){
+        currentitem = Panier.findOne(this._id, {fields:{idproduct: 1}});
+        Session.set('inpanier'+currentitem.idproduct, false);
         Panier.remove(this._id);
     }
 })
@@ -166,6 +178,9 @@ Template.admin.events({
     'click .btnadd':function(){
         Session.set('addform', true);
     },
+    'click .btnadd2':function(){
+        Session.set('addformcat', true);
+    },
     'submit .addData'(event){
         event.preventDefault();
         name=event.target.nameitem.value;
@@ -191,6 +206,9 @@ Template.admin.events({
 
     'click .addreturn':function(){
         Session.set('addform', false);
+    },
+    'click .addcatreturn':function(){
+        Session.set('addformcat', false);
     }
 });
 // ----------------------HELPERS----------------------
@@ -228,6 +246,9 @@ Template.admin.helpers({
     },
     'addisclicked':function(){
         return Session.get('addform');
+    },
+    'add2isclicked':function(){
+        return Session.get('addformcat');
     },
     'option1clicked':function(){
         return Session.get('option1');
@@ -310,22 +331,26 @@ Template.cat.helpers({
         'click .btnchangedata': function () {
             Session.set('datachange' + this._id, true);
         },
+
+        'click .btndeletedata':function(){
+            currentcat = Categories.findOne(this._id, {fields:{name: 1}});
+            currentcat = currentcat.name;
+
+            Meteor.call('deleteproductsforcat', currentcat);
+            Meteor.call('deletecat', this._id);
+        },
         'submit .changedatacat'(event){
             event.preventDefault();
             currentcat = Categories.findOne(this._id, {fields:{name: 1}});
             currentcat = currentcat.name;
             namecat=event.target.nameitem.value;
+            imagecat=event.target.imgitem.value;
 
             Meteor.call('updatecatforproducts', currentcat, namecat);
+            Meteor.call('updatecat', this._id, namecat, imagecat);
 
             Session.set('datachange' + this._id, false);
-        },
-
-        'click .btndeletedata':function(){
-            Meteor.call('deletecategories');
         }
-
-
     });
 
     // -----------------------HELPERS--------------------------
@@ -333,4 +358,21 @@ Template.datacat.helpers({
     'btnchangedataclicked':function(){
         return Session.get('datachange'+this._id);
     }
-})
+});
+
+// ==========================CHANGEDATACAT=========================
+// --------------------------------EVENTS---------------------------
+Template.formdatacatadd.events({
+    'submit .changedatacatadd'(event){
+        event.preventDefault();
+        categorie=event.target.nameitem.value;
+        image=event.target.imgitem.value;
+        catexists = Categories.find({name: image}, {limit: 1}).count() > 0;
+
+        if(!catexists){
+            Meteor.call('addcategories', categorie, image);
+        }
+    Session.set('addformcat', false);
+}
+});
+
